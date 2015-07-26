@@ -6,6 +6,13 @@
 
     <groupId>com.memoizrlabs.normalizer</groupId>
     <artifactId>normalizer</artifactId>
-    <version>1.0</version>
+    <version>1.0.2-SNAPSHOT</version>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 
 </project>
