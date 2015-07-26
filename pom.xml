@@ -8,18 +8,4 @@
     <artifactId>normalizer</artifactId>
     <version>1.0</version>
 
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
-    <dependencies>
-    	<dependency>
-            <groupId>com.github.memoizr</groupId>
-            <artifactId>normalizer</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-    </dependencies>
-
 </project>
