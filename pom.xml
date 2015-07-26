@@ -17,8 +17,8 @@
     <dependencies>
     	<dependency>
             <groupId>com.github.memoizr</groupId>
-            <artifactId>Normalizer</artifactId>
-            <version>1.0</version>
+            <artifactId>normalizer</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 
