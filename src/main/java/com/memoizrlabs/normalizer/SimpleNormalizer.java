@@ -1,9 +1,9 @@
 package com.memoizrlabs.normalizer;
 
 /**
- * Created by memoizr on 24/07/15.
+ * A simple normalizer implementation.
  *
- * A simple normalizer implementation with sensible defaults.
+ * @author memoizr
  */
 final public class SimpleNormalizer {
     private static final float COMPRESSION_FACTOR = 1.2f;
@@ -46,8 +46,8 @@ final public class SimpleNormalizer {
      * (RMS) over time when the new peaks are consistently of a lesser
      * magnitude than previous ones.
      *
-     * @param volume raw volume input.
-     * @return the normalized volume.
+     * @param volume The raw volume input.
+     * @return The normalized volume.
      */
     public float normalizeVolume(float volume) {
         mMaxVolume = volume > mMaxVolume ? volume : mMaxVolume;
