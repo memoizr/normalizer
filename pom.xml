@@ -6,7 +6,7 @@
 
     <groupId>com.memoizrlabs.normalizer</groupId>
     <artifactId>normalizer</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3</version>
 
     <repositories>
         <repository>

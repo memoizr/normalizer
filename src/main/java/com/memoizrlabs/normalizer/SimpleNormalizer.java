@@ -2,8 +2,10 @@ package com.memoizrlabs.normalizer;
 
 /**
  * Created by memoizr on 24/07/15.
+ *
+ * A simple normalizer implementation with sensible defaults.
  */
-public class SimpleNormalizer {
+final public class SimpleNormalizer {
     private static final float COMPRESSION_FACTOR = 1.2f;
     private static final float DECAY_RATE = 0.96f;
     private static final float INVERTED_DECAY_RATE = 1 / DECAY_RATE;
@@ -13,30 +15,40 @@ public class SimpleNormalizer {
     private static final float VOLUME_UPPER_MINIMUM = 1.1f;
     private static final int SAMPLE_SIZE = 256;
 
-    private static final float[] sampleSquares = new float[SAMPLE_SIZE];
+    private static final float[] mSampleSquares = new float[SAMPLE_SIZE];
 
     private float mMaxVolume = MIN_VOLUME_RANGE;
     private float mMinVolume = 1f;
-    private float sum;
-    private int cyclicCounter;
-    private int firstRunCounter;
+    private float mSum;
+    private int mCyclicCounter;
+    private int mFirstRunCount;
 
     private float getRollingRMS(float value) {
         final float square = value * value;
 
-        if (firstRunCounter < SAMPLE_SIZE) {
-            sum += square;
-            sampleSquares[firstRunCounter] = square;
-            firstRunCounter++;
+        if (mFirstRunCount < SAMPLE_SIZE) {
+            mSum += square;
+            mSampleSquares[mFirstRunCount] = square;
+            mFirstRunCount++;
         } else {
-            sum = sum - sampleSquares[cyclicCounter] + square;
-            sampleSquares[cyclicCounter] = square;
-            cyclicCounter = ++cyclicCounter % SAMPLE_SIZE;
+            mSum = mSum - mSampleSquares[mCyclicCounter] + square;
+            mSampleSquares[mCyclicCounter] = square;
+            mCyclicCounter = ++mCyclicCounter % SAMPLE_SIZE;
         }
 
-        return (float) Math.sqrt(sum / SAMPLE_SIZE);
+        return (float) Math.sqrt(mSum / SAMPLE_SIZE);
     }
 
+    /**
+     * Normalizes a raw volume input stream. The normalized amplitude will
+     * be bound by the maximum amplitude and the minimum amplitude recorded.
+     * These limits will exponentially converge towards the average volume
+     * (RMS) over time when the new peaks are consistently of a lesser
+     * magnitude than previous ones.
+     *
+     * @param volume raw volume input.
+     * @return the normalized volume.
+     */
     public float normalizeVolume(float volume) {
         mMaxVolume = volume > mMaxVolume ? volume : mMaxVolume;
         mMinVolume = volume < mMinVolume ? volume : mMinVolume;
@@ -50,5 +62,20 @@ public class SimpleNormalizer {
         mMinVolume = mMinVolume < rms * VOLUME_LOWER_MAXIMUM ? mMinVolume * INVERTED_DECAY_RATE : mMinVolume;
 
         return (float) Math.pow(normalizedVolume, COMPRESSION_FACTOR);
+    }
+
+    /**
+     * Resets the state of the normalizer to default values.
+     */
+    public void reset() {
+        mMaxVolume = MIN_VOLUME_RANGE;
+        mMinVolume = 1f;
+        mSum = 0;
+        mCyclicCounter = 0;
+        mFirstRunCount = 0;
+
+        for (int i = 0; i < mSampleSquares.length; i++) {
+            mSampleSquares[i] = 0f;
+        }
     }
 }
