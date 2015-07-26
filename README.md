@@ -1,7 +1,7 @@
 # Normalizer
-Super lightwight, performant and easy-to-use real-time normalizer for audio streams.
+Super lightweight, performant and easy-to-use real-time normalizer for audio streams.
 
-This library is intended for dynamic audio stram normalization, that is, the application of a varying amount of gain to
+This library is intended for dynamic audio stream normalization, that is, the application of a varying amount of gain to
 a stream of audio samples to bring the average sound level (RMS) and peaks to within desired levels.
 
 ## Installation
