@@ -14,8 +14,8 @@ final public class SimpleNormalizer {
     private static final float VOLUME_LOWER_MAXIMUM = 0.95f;
     private static final float VOLUME_UPPER_MINIMUM = 1.4f;
     private static final int SAMPLE_SIZE = 256;
-    private static final float DEFAULT_MAX_VOLUME = 0f;
-    private static final float DEFAULT_MIN_VOLUME = 1f;
+    private static final float DEFAULT_MAX_VOLUME = 1f;
+    private static final float DEFAULT_MIN_VOLUME = 0f;
 
     private static final float[] mSampleSquares = new float[SAMPLE_SIZE];
 

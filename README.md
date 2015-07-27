@@ -19,7 +19,7 @@ This project is using <a href="http://jitpack.io">JitPack</a> as a repository. A
 <dependency>
     <groupId>com.github.memoizr</groupId>
     <artifactId>normalizer</artifactId>
-    <version>v1.0.5</version>
+    <version>v1.0.6</version>
 </dependency>
 ```
 **Gradle:**
@@ -32,7 +32,7 @@ repositories {
 ```
 ```
 dependencies {
-   compile 'com.github.memoizr:normalizer:v1.0.5'
+   compile 'com.github.memoizr:normalizer:v1.0.6'
 }
 ```
 
