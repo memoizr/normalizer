@@ -6,19 +6,21 @@ package com.memoizrlabs.normalizer;
  * @author memoizr
  */
 final public class SimpleNormalizer {
-    private static final float COMPRESSION_FACTOR = 1.2f;
+    private static final float COMPRESSION_FACTOR = 1.15f;
     private static final float DECAY_RATE = 0.96f;
     private static final float INVERTED_DECAY_RATE = 1 / DECAY_RATE;
     private static final float MIN_VOLUME_RANGE = 0.01f;
-    private static final float RESPONSE_FACTOR = 0.8f;
+    private static final float RESPONSE_FACTOR = 0.65f;
     private static final float VOLUME_LOWER_MAXIMUM = 0.95f;
-    private static final float VOLUME_UPPER_MINIMUM = 1.1f;
+    private static final float VOLUME_UPPER_MINIMUM = 1.4f;
     private static final int SAMPLE_SIZE = 256;
+    private static final float DEFAULT_MAX_VOLUME = 0f;
+    private static final float DEFAULT_MIN_VOLUME = 1f;
 
     private static final float[] mSampleSquares = new float[SAMPLE_SIZE];
 
-    private float mMaxVolume = MIN_VOLUME_RANGE;
-    private float mMinVolume = 1f;
+    private float mMaxVolume = DEFAULT_MAX_VOLUME;
+    private float mMinVolume = DEFAULT_MIN_VOLUME;
     private float mSum;
     private int mCyclicCounter;
     private int mFirstRunCount;
@@ -40,11 +42,8 @@ final public class SimpleNormalizer {
     }
 
     /**
-     * Normalizes a raw volume input stream. The normalized amplitude will
-     * be bound by the maximum amplitude and the minimum amplitude recorded.
-     * These limits will exponentially converge towards the average volume
-     * (RMS) over time when the new peaks are consistently of a lesser
-     * magnitude than previous ones.
+     * Normalizes a raw volume input stream. The normalized amplitude will be bound by the maximum amplitude and the minimum amplitude recorded. These limits
+     * will exponentially converge towards the average volume (RMS) over time when the new peaks are consistently of a lesser magnitude than previous ones.
      *
      * @param volume The raw volume input.
      * @return The normalized volume.
@@ -68,8 +67,8 @@ final public class SimpleNormalizer {
      * Resets the state of the normalizer to default values.
      */
     public void reset() {
-        mMaxVolume = MIN_VOLUME_RANGE;
-        mMinVolume = 1f;
+        mMaxVolume = DEFAULT_MAX_VOLUME;
+        mMinVolume = DEFAULT_MIN_VOLUME;
         mSum = 0;
         mCyclicCounter = 0;
         mFirstRunCount = 0;
